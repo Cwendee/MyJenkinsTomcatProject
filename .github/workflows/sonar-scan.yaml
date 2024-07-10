@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
+          node-version: '20'
       - name: Build with Maven
         run: mvn clean install
       - name: SonarQube Scan
@@ -27,4 +28,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
           projectKey: GitHub-JTProject-Scan
-        run: mvn sonar:sonar -Dsonar.projectKey=GitHub-JTProject-Scan -Dsonar.host.url=${{ vars.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        with:
+          distribution: 'maven'
