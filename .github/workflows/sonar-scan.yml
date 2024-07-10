@@ -9,6 +9,8 @@ on:
 
 name: Main Workflow
 jobs:
+     Sonarqube:
+     name: SonarQube Trigger 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
