@@ -1,28 +1,22 @@
 name: SonarQube Scan
-
 on:
   push:
     branches:
       - main
-
 jobs:
   sonarqube-analysis:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: Set up JDK and Maven
+        - name: Set up JDK and Maven
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           maven-version: '3.9.6'  # Use the same Maven version as your local setup
-          
-      - name: Build with Maven
+          - name: Build with Maven
         run: mvn clean verify
-        
-      - name: SonarQube Scan
+        - name: SonarQube Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
