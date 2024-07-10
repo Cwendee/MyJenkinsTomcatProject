@@ -26,7 +26,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn sonar:sonar -Dsonar.projectKey==squ_0412b8d777de9eae2cbaf5a4340b3dda372aeedc
- -Dsonar.projectName=YourProjectName -Dsonar.sources=src/main/java -Dsonar.java.binaries=target/classes
-        
+         run: mvn sonar:sonar \
+       -Dsonar.projectKey=squ_0412b8d777de9eae2cbaf5a4340b3dda372aeedc \
+       -Dsonar.projectName=YourProjectName \
+       -Dsonar.sources=src/main/java \
+       -Dsonar.java.binaries=target/classes
   # Add more steps as needed, such as deployment or notifications
