@@ -3,19 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <groupId>com.mavenjava.test</groupId>
     <artifactId>MyJenkinsTomcatProject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>MavenWebProject Maven Webapp</name>
     <url>http://www.example.com</url>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.login>admin</sonar.login>
         <sonar.password>son@r@dmin</sonar.password>
+        <sonar.projectKey>squ_0412b8d777de9eae2cbaf5a4340b3dda372aeedc</sonar.projectKey>
+        <sonar.projectName>MyJenkinsTomcatProject</sonar.projectName>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
     </properties>
+    
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -36,8 +43,12 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    
     <build>
         <finalName>MavenWebProject</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <outputDirectory>target/classes</outputDirectory>
+        
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -70,11 +81,12 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        
         <plugins>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.1.2184</version> <!-- SonarQube Scanner for Maven plugin version -->
+                <version>3.9.1.2184</version>
                 <configuration>
                     <sonar.login>${sonar.login}</sonar.login>
                     <sonar.password>${sonar.password}</sonar.password>
