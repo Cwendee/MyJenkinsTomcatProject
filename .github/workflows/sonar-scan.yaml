@@ -29,4 +29,4 @@ jobs:
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
           projectKey: GitHub-JTProject-Scan
         with:
-          distribution: 'maven'
+          distribution: 'sonarqube'
