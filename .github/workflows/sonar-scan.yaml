@@ -9,11 +9,16 @@ on:
 
 name: Main Workflow
 jobs:
+<<<<<<< HEAD
   build:
+=======
+  sonarqube:
+>>>>>>> 952b6c28e263f42c5f062b24872a2d1b0620d80c
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
+<<<<<<< HEAD
         fetch-depth: 0
     - name: Set up JDK 11
       uses: actions/setup-java@v3
@@ -28,3 +33,13 @@ jobs:
       run: mvn sonar:sonar -Dsonar.projectKey=GitHub-JTProject-Scan -Dsonar.host.url=${{ vars.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
   # Add more steps as needed, such as deployment or notifications
+=======
+        # Disabling shallow clones is recommended for improving the relevancy of reporting
+        fetch-depth: 0
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@v2.1.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+        projectKey: GitHub-JTProject-Scan
+>>>>>>> 952b6c28e263f42c5f062b24872a2d1b0620d80c
