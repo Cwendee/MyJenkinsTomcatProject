@@ -1,4 +1,4 @@
-name: Sonar Scan and Deploy
+name: SonarQube Scan
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  sonarqube-scan:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,12 +22,8 @@ jobs:
         run: |
           mvn clean package
 
-      - name: Deploy to Tomcat
-        uses: peaceiris/actions-tomcat@v2
-        with:
-          war: target/*.war
-          url: http://localhost:8083
-          username: ${{ secrets.TOMCAT_USERNAME }}
-          password: ${{ secrets.TOMCAT_PASSWORD }}
+      - name: SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar -Dsonar.host.url=http://your-sonarqube-instance -Dsonar.projectKey=GitHub-JTProject-Scan
 
-      # Add additional steps as needed for deployment or post-processing
