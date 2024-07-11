@@ -25,5 +25,8 @@ jobs:
       - name: SonarQube Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn sonar:sonar -Dsonar.host.url=http://your-sonarqube-instance -Dsonar.projectKey=GitHub-JTProject-Scan
-
+        run: mvn sonar:sonar \
+             -Dsonar.host.url=http://54.211.79.81:9000 \
+             -Dsonar.projectKey=GitHub-JTProject-Scan \
+             -Dsonar.language=java \
+             -Dsonar.sources=src/main/java
