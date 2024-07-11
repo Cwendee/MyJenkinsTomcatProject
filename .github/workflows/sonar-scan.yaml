@@ -22,7 +22,8 @@ project:
     - hudson.plugins.deploy.DeployPublisher:
         '@plugin': deploy@1.16
         adapters:
-          - hudson.plugins.deploy.tomcat.Tomcat9xAdapter:
+          -
+            hudson.plugins.deploy.tomcat.Tomcat9xAdapter:
               credentialsId: 7cd0459c-796c-4cde-b27b-6398c590631a
               path: null
               url: http://localhost:8083
@@ -35,7 +36,7 @@ project:
     branches:
       - hudson.plugins.git.BranchSpec:
           name: '*/main'
-    configVersion: '2'
+configVersion: '2'
     doGenerateSubmoduleConfigurations: 'false'
     extensions: null
     submoduleCfg: '@class': empty-list
@@ -58,4 +59,3 @@ jobs:
           bash export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
           mvn clean package
           # Add other deployment scripts as needed
-
