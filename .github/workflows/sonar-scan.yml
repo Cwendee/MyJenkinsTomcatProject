@@ -4,32 +4,49 @@ on:
       - main
 
 project:
-  ...
-  publishers:
-    - hudson.plugins.deploy.DeployPublisher:
-        '@plugin': deploy@1.16
-        adapters:
-          -
-            hudson.plugins.deploy.tomcat.Tomcat9xAdapter:
-              credentialsId: 7cd0459c-796c-4cde-b27b-6398c590631a
-              path: null
-              url: http://localhost:8083
-              contextPath: /
-              onFailure: 'false'
-              war: target/*.war
-  scm:
-    '@class': hudson.plugins.git.GitSCM
-    '@plugin': git@5.2.2
-    branches:
-      - hudson.plugins.git.BranchSpec:
-          name: '*/main'
-    configVersion: '2'
-    doGenerateSubmoduleConfigurations: 'false'
-    extensions: null
-    submoduleCfg: '@class': empty-list
-    userRemoteConfigs:
-      - hudson.plugins.git.UserRemoteConfig:
-          url: https://github.com/Cwendee/MyJenkinsTomcatProject.git
+actions: null
+blockBuildWhenDownstreamBuilding: 'false'
+blockBuildWhenUpstreamBuilding: 'false'
+buildWrappers: null
+builders:
+  - hudson.tasks.Shell:
+      command: 'bash export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 mvn clean package'
+configuredLocalRules: null
+canRoam: 'true'
+concurrentBuild: 'false'
+description: null
+disabled: 'false'
+keepDependencies: 'false'
+properties: null
+publishers:
+  - hudson.plugins.deploy.DeployPublisher:
+      '@plugin': deploy@1.16
+      adapters:
+        -
+          hudson.plugins.deploy.tomcat.Tomcat9xAdapter:
+            credentialsId: 7cd0459c-796c-4cde-b27b-6398c590631a
+            path: null
+            url: http://localhost:8083
+            contextPath: /
+            onFailure: 'false'
+            war: target/*.war
+scm:
+  '@class': hudson.plugins.git.GitSCM
+  '@plugin': git@5.2.2
+  branches:
+    - hudson.plugins.git.BranchSpec:
+        name: '*/main'
+configVersion: '2'
+  doGenerateSubmoduleConfigurations: 'false'
+  extensions: null
+  submoduleCfg: '@class': empty-list
+  userRemoteConfigs:
+    - hudson.plugins.git.UserRemoteConfig:
+        url: https://github.com/Cwendee/MyJenkinsTomcatProject.git
+triggers:
+  - com.cloudbees.jenkins.GitHubPushTrigger:
+      '@plugin': github@1.39.0
+      spec: null
 
 jobs:
   build-and-deploy:
@@ -42,4 +59,3 @@ jobs:
           bash export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
           mvn clean package
           # Add other deployment scripts as needed
-
